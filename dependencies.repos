@@ -1,6 +1,5 @@
 repositories:
 
-  #video_stream_opencv:
-    #type: git
-    #url: https://github.com/ros-drivers/video_stream_opencv.git 
-    #version: master
+  dave:
+    type: git
+    url: https://github.com/Field-Robotics-Lab/dave.git 
