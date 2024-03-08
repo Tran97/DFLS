@@ -180,7 +180,7 @@ RUN groupadd --gid $GID $USERNAME \
  && chown -R ${UID}:${GID} /home/${USERNAME}
 
 # Set the ownership of the overlay workspace to the new user
-RUN chown -R ${UID}:${GID} /overlay_ws/ /underlay_ws/
+RUN chown -R ${UID}:${GID} /overlay_ws/
 
 
 # Set the user and source entrypoint in the user's .bashrc file
