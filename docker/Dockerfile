@@ -35,6 +35,26 @@ RUN apt update && \
   wget \
   && apt clean
 
+
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+RUN dpkg -i cuda-keyring_1.1-1_all.deb
+#RUN add-apt-repository contrib
+
+# Install CUDA Toolkit
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cuda-toolkit-12.2 \
+    nvidia-gds \
+    && rm -rf /var/lib/apt/lists/*
+
+
+#RUN export PATH=/usr/local/cuda-12.2/bin${PATH:+:${PATH}}
+#RUN export LD_LIBRARY_PATH=/usr/local/12.2/lib64\
+                         #${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+ENV PATH="/usr/local/cuda-12.2/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/usr/local/cuda-12.2/lib64:${LD_LIBRARY_PATH}"
+
+
 # Install some 'standard' ROS packages and utilities.
 RUN apt update \
   && apt install -y --no-install-recommends \
@@ -82,11 +102,14 @@ RUN apt update \
 # Create Catkin workspace 
 RUN mkdir -p /underlay_ws/src 
 WORKDIR /underlay_ws/src
-COPY dependencies.repos dave_sim.repos ./
+
+COPY dependencies.repos dave_sim.repos multibeam_sim.repos ./
 RUN vcs import < dependencies.repos
 
 RUN rm -rf dockwater ds_msgs ds_sim eca_a9 rexrov2 uuv_manipulators uuv_simulator
 RUN vcs import --skip-existing < dave_sim.repos
+
+RUN vcs import --skip-existing < multibeam_sim.repos
 
 
 

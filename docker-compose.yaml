@@ -17,6 +17,7 @@ services:
     ipc: host
     # Needed to display graphical applications
     privileged: True
+    runtime: nvidia
     environment:
       # Allows graphical programs in the container.
       - DISPLAY=${DISPLAY}
@@ -31,7 +32,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
+              count: all
               capabilities: [gpu]
 
   # Overlay image containing the example source code.
