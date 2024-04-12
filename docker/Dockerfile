@@ -54,6 +54,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PATH="/usr/local/cuda-12.2/bin:${PATH}"
 ENV LD_LIBRARY_PATH="/usr/local/cuda-12.2/lib64:${LD_LIBRARY_PATH}"
 
+# Install python requirements
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
+
 
 # Install some 'standard' ROS packages and utilities.
 RUN apt update \
