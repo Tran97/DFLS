@@ -1,0 +1,6 @@
+[submodule "src/dave_simulations"]
+	path = src/dave_simulations
+	url = git@github.com:Lucasmogsan/dave_simulations.git
+[submodule "src/StereoFLS"]
+	path = src/StereoFLS
+	url = git@github.com:Lucasmogsan/StereoFLS.git
